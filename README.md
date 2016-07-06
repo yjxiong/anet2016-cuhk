@@ -19,5 +19,9 @@ The codebase is written in Python. It is recommended to use [Anaconda][anaconda]
 Besides, we also use Caffe and OpenCV. 
 Particularly, the OpenCV should be compiled with VideoIO support. GPU support will be good if possible. 
 
+##LICENSE
+Released under [BSD 2-Clause license][license].
+
 
 [anaconda]:https://www.continuum.io/downloads
+[license]:https://github.com/yjxiong/anet16-cuhk/blob/master/LICENSE
