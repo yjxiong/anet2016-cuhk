@@ -63,4 +63,4 @@ Released under [BSD 2-Clause license][license].
 
 
 [anaconda]:https://www.continuum.io/downloads
-[license]:https://github.com/yjxiong/anet16-cuhk/blob/master/LICENSE
+[license]:https://github.com/yjxiong/anet2016-cuhk/blob/master/LICENSE
