@@ -169,7 +169,7 @@ class ANetDB(object):
         self._idx_name_table = {i: e['nodeName'] for i, e in enumerate(sorted_lead_nodes)}
         self._name_idx_table = {e['nodeName']: i for i, e in enumerate(sorted_lead_nodes)}
         self._name_table = {x['nodeName']: x for x in sorted_lead_nodes}
-        logger.info("Got {} leaf classes out of {}".format(len(self._name_table), len(name_dict)))
+        # logger.info("Got {} leaf classes out of {}".format(len(self._name_table), len(name_dict)))
 
 
 if __name__ == '__main__':

@@ -56,3 +56,6 @@ OpenCV_DIR=../../../3rd-party/opencv-$version/build/ cmake ..
 make -j32
 echo "Caffe Built"
 cd ../../../
+
+# install python packages
+pip install -r py_requirements.txt

@@ -13,12 +13,17 @@ import cv2
 
 class CaffeNet(object):
 
-    def __init__(self, net_proto, net_weights, device_id):
+    def __init__(self, net_proto, net_weights, device_id, input_size=None):
         caffe.set_mode_gpu()
         caffe.set_device(device_id)
         self._net = caffe.Net(net_proto, net_weights, caffe.TEST)
 
-        transformer = caffe.io.Transformer({'data': self._net.blobs['data'].data.shape})
+        input_shape = self._net.blobs['data'].data.shape
+
+        if input_size is not None:
+            input_shape = input_shape[:2] + input_size
+
+        transformer = caffe.io.Transformer({'data': input_shape})
 
         if self._net.blobs['data'].data.shape[1] == 3:
             transformer.set_transpose('data', (2, 0, 1))  # move image channels to outermost dimension
@@ -41,7 +46,7 @@ class CaffeNet(object):
                     resized_frame = [cv2.resize(x, (0,0), fx=1.0/scale, fy=1.0/scale) for x in frame]
                     os_frame.extend(oversample(resized_frame, (self._sample_shape[2], self._sample_shape[3])))
         else:
-            os_frame = np.array([frame,])
+            os_frame = np.array(frame)
         data = np.array([self._transformer.preprocess('data', x) for x in os_frame])
 
         self._net.blobs['data'].reshape(*data.shape)
@@ -54,7 +59,7 @@ class CaffeNet(object):
         if over_sample:
             os_frame = flow_stack_oversample(frame, (self._sample_shape[2], self._sample_shape[3]))
         else:
-            os_frame = frame
+            os_frame = np.array([frame,])
 
         data = os_frame - 128
 

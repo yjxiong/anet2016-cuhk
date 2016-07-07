@@ -6,6 +6,7 @@ local/
 log/
 scripts/run_score_prediction.sh
 3rd-party/
+models/
 cv2.so
 
 # Byte-compiled / optimized / DLL files

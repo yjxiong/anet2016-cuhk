@@ -19,6 +19,8 @@ ANET_CFG.DB_VERSIONS = {
     '1.3': 'data/activity_net.v1-3.min.json'
 }
 
+# Force the leaf node to be included in the label list
+ANET_CFG.FORCE_INCLUDE = {"1.3": [], "1.2": []}
 
 # Acceptable extension of the video files
 ANET_CFG.ACC_EXT = {'.mp4', '.webm', '.avi', '.mkv'}

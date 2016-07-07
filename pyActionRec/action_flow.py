@@ -4,7 +4,7 @@ import sys
 
 sys.path.append(ANET_CFG.DENSE_FLOW_ROOT+'/build')
 
-from libpydenseflow import TVL1FlowExtractor, TVL1WarpFlowExtractor
+from libpydenseflow import TVL1FlowExtractor
 import action_caffe
 import numpy as np
 
@@ -14,8 +14,6 @@ class FlowExtractor(object):
     def __init__(self, dev_id, bound=20):
         TVL1FlowExtractor.set_device(dev_id)
         self._et = TVL1FlowExtractor(bound)
-        TVL1WarpFlowExtractor.set_device(dev_id)
-        self._warp_et = TVL1WarpFlowExtractor(bound)
 
     def extract_flow(self, frame_list, new_size=None):
         """
