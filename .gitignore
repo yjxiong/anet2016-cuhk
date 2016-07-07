@@ -5,6 +5,8 @@
 local/
 log/
 scripts/run_score_prediction.sh
+3rd-party/
+cv2.so
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
