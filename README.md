@@ -22,6 +22,17 @@ Particularly, the OpenCV should be compiled with VideoIO support. GPU support wi
 ##Requirements
 NVIDIA GPU with CUDA support, at least 4GB display memory.
 
+##Get the code
+Use Git
+```
+git clone --recursive https://github.com/yjxiong/anet2016-cuhk
+```
+
+If you happen to forget to add `--recursive` to the command. You can still go to the project directory and issue
+```
+git submodule update --init
+```
+
 ##Single Video Classification
 - Build all modules
 In the root directory of the project, run the following command
