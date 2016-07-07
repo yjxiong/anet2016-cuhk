@@ -23,16 +23,16 @@ Particularly, the OpenCV should be compiled with VideoIO support. GPU support wi
 NVIDIA GPU with CUDA support, at least 4GB display memory.
 
 ##Single Video Classification
-1. Build all modules
+- Build all modules
 In the root directory of the project, run the following command
 ```
 bash build_all.sh
 ```
-2. Get reference models
+- Get reference models
 ```
 bash models/get_reference_models.sh
 ```
-3. Run the classification
+- Run the classification
 There is a video clip in the `data/plastering.avi` for your example.
 To do single video classification with RGB model one can run
 ```
@@ -45,7 +45,7 @@ bash examples/classify_video.py --use_flow data/plastering.avi
 ```
 You can use your own video files by specifying the filename. More functions to be added.
 The two-stream model here consists of one reset-200 model for RGB input and one BN-Inception model for optical flow input.
-The model spec and parameter files can be found `models/`
+The model spec and parameter files can be found in `models/`.
 
 ##LICENSE
 Released under [BSD 2-Clause license][license].
