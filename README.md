@@ -6,6 +6,8 @@ Although initially designed for the challenge, the repository also means to prov
 
 *We are currently organizing the codebase. Please stay tuned.*
 
+* Jun 7 - Single video classification released
+
 ##Functionalities & Release Status
 
 - [x] Basic utilities
