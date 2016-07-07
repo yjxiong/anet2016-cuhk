@@ -19,7 +19,7 @@ def flow_stack_oversample(flow_stack, crop_dims):
     h_center_offset = (im_shape[0] - crop_dims[0])/2
     w_center_offset = (im_shape[1] - crop_dims[1])/2
 
-    crop_ix = np.empty((5,4), dtype=int)
+    crop_ix = np.empty((5, 4), dtype=int)
 
     cnt = 0
     for i in h_indices:

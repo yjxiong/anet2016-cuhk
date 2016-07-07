@@ -149,11 +149,16 @@ class ANetDB(object):
         self._video_dict = {k: Video(k, v, self._name_idx_table) for k,v in self._database.items()}
 
     def get_ordered_label_list(self):
+        """
+        This function return a list of textual labels corresponding the numerical labels. For example, if one samples is
+        classified to class 18, the textual label is the 18-th element in the returned list.
+        Returns: list
+        """
         return [self._idx_name_table[x] for x in sorted(self._idx_name_table.keys())]
 
     def _parse_taxonomy(self):
         """
-        This function just parse the taxonomy file
+        This function just parses the taxonomy file
         It gives alphabetical ordered indices to the classes in competition
         :return:
         """
@@ -169,7 +174,6 @@ class ANetDB(object):
         self._idx_name_table = {i: e['nodeName'] for i, e in enumerate(sorted_lead_nodes)}
         self._name_idx_table = {e['nodeName']: i for i, e in enumerate(sorted_lead_nodes)}
         self._name_table = {x['nodeName']: x for x in sorted_lead_nodes}
-        # logger.info("Got {} leaf classes out of {}".format(len(self._name_table), len(name_dict)))
 
 
 if __name__ == '__main__':

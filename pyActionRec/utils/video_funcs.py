@@ -2,7 +2,6 @@
 This module provides our implementation of different functions to do video-level classification and stream fusion
 """
 import numpy as np
-from sklearn.metrics import average_precision_score
 from metrics import softmax
 
 

@@ -61,6 +61,7 @@ class VideoProc(object):
         :param starting_frame: the frame index from which the iteration starts
         :param interval: interval of frame sampling
         :param length: how many frame to extract at once
+        :param timely: if set to True, the interval will be using the unit of second, instead of frame
         :return: generator of frame stacks
         """
         if not self._loaded:
