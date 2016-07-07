@@ -16,11 +16,13 @@ Although initially designed for the challenge, the repository also means to prov
 
 ##Dependencies
 The codebase is written in Python. It is recommended to use [Anaconda][anaconda] distribution package with it.
+
 Besides, we also use Caffe and OpenCV. 
 Particularly, the OpenCV should be compiled with VideoIO support. GPU support will be good if possible.
+If you use `build_all.sh`, it will locally install these dependencies for you.
 
 ##Requirements
-NVIDIA GPU with CUDA support, at least 4GB display memory.
+NVIDIA GPU with CUDA support. At least 4GB display memory is needed to run the reference models.
 
 ##Get the code
 Use Git
@@ -28,7 +30,7 @@ Use Git
 git clone --recursive https://github.com/yjxiong/anet2016-cuhk
 ```
 
-If you happen to forget to add `--recursive` to the command. You can still go to the project directory and issue
+If you happen to forget adding `--recursive` to the command. You can still go to the project directory and issue
 ```
 git submodule update --init
 ```
@@ -39,7 +41,7 @@ In the root directory of the project, run the following command
 ```
 bash build_all.sh
 ```
-- Get reference models
+- Get the reference models
 ```
 bash models/get_reference_models.sh
 ```
@@ -55,7 +57,8 @@ To use the two-stream model, one can add `--use_flow` flag to the command. The f
 bash examples/classify_video.py --use_flow data/plastering.avi
 ```
 You can use your own video files by specifying the filename. More functions to be added.
-The two-stream model here consists of one reset-200 model for RGB input and one BN-Inception model for optical flow input.
+
+The two-stream model here consists of one reset-200 model for RGB input and one BN-Inception model for optical flow input. 
 The model spec and parameter files can be found in `models/`.
 
 ##LICENSE
