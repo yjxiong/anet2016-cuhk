@@ -58,7 +58,12 @@ To use the two-stream model, one can add `--use_flow` flag to the command. The f
 ```
 bash examples/classify_video.py --use_flow data/plastering.avi
 ```
-You can use your own video files by specifying the filename. More functions to be added.
+You can use your own video files by specifying the filename. 
+
+One can use also specify a youtube url here to do the classification, for example
+```
+bash examples/classify_video.py https://www.youtube.com/watch?v=QkuC0lvMAX0
+```
 
 The two-stream model here consists of one reset-200 model for RGB input and one BN-Inception model for optical flow input. 
 The model spec and parameter files can be found in `models/`.
