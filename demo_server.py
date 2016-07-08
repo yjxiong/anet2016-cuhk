@@ -69,7 +69,10 @@ def upload_video():
         top_3_results = []
         for i in xrange(3):
             k = idx[i]
-            top_3_results.append('{}: {}'.format(lb_list[k], scores[k]))
+            top_3_results.append({
+                'name': lb_list[k],
+                'score': str(scores[k])
+            })
 
         # return the result in json
         return jsonify(error=None, results=top_3_results), 200, {'ContentType': 'application/json'}
