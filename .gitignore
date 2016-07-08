@@ -8,6 +8,8 @@ scripts/run_score_prediction.sh
 3rd-party/
 models/
 cv2.so
+static/
+tmp/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

@@ -14,9 +14,11 @@
     <!-- Bootstrap core CSS -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 
+    <!-- file input plugin css -->
+    <link href="static/css/fileinput.min.css" media="all" rel="stylesheet" type="text/css" />
 
     <!-- Custom styles for this template -->
-    <link href="static/cover.css" rel="stylesheet">
+    <link href="static/css/cover.css" rel="stylesheet">
 
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -50,14 +52,9 @@
           <div class="inner cover">
             <h1 class="cover-heading">Action Recognition from Web Videos</h1>
             <p class="lead">
-                    <input id="input-700" name="kartik-input-700[]" type="file" multiple class="file-loading">
-                    <script>
-                    $("#input-700").fileinput({
-                        uploadUrl: "http://localhost/file-upload-single/1", // server upload action
-                        uploadAsync: true,
-                        maxFileCount: 5
-                    });
-                    </script>
+                    <input id="video-input" name="video_file" type="file" class="file-loading">
+                    <div id="kv-error-1" style="margin-top:10px;display:none"></div>
+                    <div id="kv-success-1" class="alert alert-success fade in" style="margin-top:10px;display:none"></div>
             </p>
             <p class="lead">
               <a href="#" class="btn btn-lg btn-default">Learn More on Github</a>
@@ -79,7 +76,31 @@
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script
+			  src="https://code.jquery.com/jquery-2.2.4.min.js"
+			  integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+			  crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    <script src="static/js/fileinput.min.js"></script>
+    <script>
+        $("#video-input").fileinput({
+            uploadUrl: "/upload_video",
+            showUpload: true,
+            showPreview: false,
+            uploadAsync: true,
+            allowedFileExtensions: ['avi', 'webm', 'mp4', 'mkv'],
+            multiple: false
+        }).on('fileuploaded', function(event, data, id, index) {
+            var fname = data.files[index].name,
+                out = '<li>' + 'Uploaded file # ' + (index + 1) + ' - '  +
+                    fname + ' successfully.' + '</li>';
+
+            {#            parse response class scores           #}
+            res = data.response;
+            console.log(res.results);
+            $('#kv-success-1 ul').append(out);
+            $('#kv-success-1').fadeIn('slow');
+        });
+    </script>
   </body>
 </html>
