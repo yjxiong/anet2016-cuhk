@@ -1,3 +1,4 @@
+from __future__ import unicode_literals
 from action_caffe import CaffeNet
 from action_flow import FlowExtractor
 from video_proc import VideoProc
@@ -5,6 +6,8 @@ from anet_db import Video
 from utils.video_funcs import sliding_window_aggregation_func, default_fusion_func
 import numpy as np
 import time
+import youtube_dl
+import os
 
 
 def _dummy_vid_info(url=''):
@@ -53,6 +56,13 @@ class ActionClassifier(object):
         # the name in the proto for action classes
         self.__score_name = score_name
 
+        # the video downloader
+        self.__video_dl = youtube_dl.YoutubeDL(
+            {
+                'outtmpl': '%(id)s.%(ext)s'
+            }
+        )
+
         if self.__need_flow:
             self.__flow_extractor = FlowExtractor(0)
 
@@ -65,10 +75,12 @@ class ActionClassifier(object):
         Returns:
 
         """
-        import os
+        import urlparse
 
         if os.path.isfile(video):
             return self._classify_from_file(video)
+        elif urlparse.urlparse(video).scheme != "":
+            return self._classify_from_url(video)
 
         raise ValueError("Unknown input data type")
 
@@ -134,3 +146,20 @@ class ActionClassifier(object):
         print "total time: {} second".format(all_end-all_start)
 
         return final_scores, all_scores
+
+    def _classify_from_url(self, url):
+        """
+        This function classify an video based on input video url
+        It will first use Youtube-dl to download the video. Then will do classification on the downloaded file
+        Returns:
+            cls: classification scores
+            frm_cls: frame-wise classification scores
+        """
+
+        file_info = self.__video_dl.extract_info(url) # it also downloads the video file
+        filename = file_info['id']+'.'+file_info['ext']
+
+        scores, frm_scores = self._classify_from_file(filename)
+        import os
+        os.remove(filename)
+        return scores, frm_scores
