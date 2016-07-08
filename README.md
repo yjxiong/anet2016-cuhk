@@ -51,18 +51,18 @@ bash models/get_reference_models.sh
 There is a video clip in the `data/plastering.avi` for your example.
 To do single video classification with RGB model one can run
 ```
-bash examples/classify_video.py data/plastering.avi
+python examples/classify_video.py data/plastering.avi
 ```
 It should print the top 3 prediction in the output.
 To use the two-stream model, one can add `--use_flow` flag to the command. The framework will then extract optical flow on the fly.
 ```
-bash examples/classify_video.py --use_flow data/plastering.avi
+python examples/classify_video.py --use_flow data/plastering.avi
 ```
 You can use your own video files by specifying the filename. 
 
 One can use also specify a youtube url here to do the classification, for example
 ```
-bash examples/classify_video.py https://www.youtube.com/watch?v=QkuC0lvMAX0
+python examples/classify_video.py https://www.youtube.com/watch?v=QkuC0lvMAX0
 ```
 
 The two-stream model here consists of one reset-200 model for RGB input and one BN-Inception model for optical flow input. 
