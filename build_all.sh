@@ -59,3 +59,8 @@ cd ../../../
 
 # install python packages
 pip install -r py_requirements.txt
+
+# setup for web demo
+mkdir tmp
+mkdir static
+
