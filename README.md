@@ -85,7 +85,11 @@ For a quick start, we have set up a public demo server at
 
 The server runs on the Titan X GPU awarded for winning the challenge. Thanks to the organizers!
 
-
+##Related Projects
+* Our modified [Caffe][caffe] with fast parallel training and Video data IO
+* [Dense Flow][caffe] toolkit for optical flow extraction
+* [Very deep two-stream convnets][deep_2stream]
+* [Trajectory-Pooled Deep-Convolutional Descriptors (TDD)][tdd]
 
 ##LICENSE
 Released under [BSD 2-Clause license][license].
@@ -95,3 +99,7 @@ Released under [BSD 2-Clause license][license].
 [license]:https://github.com/yjxiong/anet2016-cuhk/blob/master/LICENSE
 [flask]:http://flask.pocoo.org/
 [demo]:#
+[caffe]:https://github.com/yjxiong/caffe
+[df]:https://github.com/yjxiong/dense_flow
+[tdd]:https://github.com/wanglimin/TDD
+[deep_2stream]:http://personal.ie.cuhk.edu.hk/~xy012/others/action_recog/
