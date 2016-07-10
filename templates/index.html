@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -12,10 +12,11 @@
     <title>Action Recognition Online Demo</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 
     <!-- file input plugin css -->
-    <link href="static/css/fileinput.min.css" media="all" rel="stylesheet" type="text/css" />
+    <link href="static/css/fileinput.min.css" media="all" rel="stylesheet" type="text/css"/>
 
     <!-- Custom styles for this template -->
     <link href="static/css/cover.css" rel="stylesheet">
@@ -26,46 +27,52 @@
       <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-  </head>
+</head>
 
-  <body>
+<body>
 
-    <div class="site-wrapper">
+<div class="site-wrapper">
 
-      <div class="site-wrapper-inner">
+    <div class="site-wrapper-inner">
 
         <div class="cover-container">
 
-          <div class="masthead clearfix">
-            <div class="inner">
-              <h3 class="masthead-brand">MMLAB@CUHK</h3>
-              <nav>
-                <ul class="nav masthead-nav">
-                  <li class="active"><a href="#">Home</a></li>
-                  <li><a href="http://mmlab.ie.cuhk.edu.hk">MMLAB</a></li>
-                  <li><a href="https://github.com/yjxiong/anet2016-cuhk">Github</a></li>
-                </ul>
-              </nav>
-            </div>
-          </div>
+{#            <div class="masthead clearfix">#}
+{#                <div class="inner">#}
+{#                    <h3 class="masthead-brand">MMLAB@CUHK</h3>#}
+{#                    <nav>#}
+{#                        <ul class="nav masthead-nav">#}
+{#                            <li class="active"><a href="#">Home</a></li>#}
+{#                            <li><a href="http://mmlab.ie.cuhk.edu.hk">MMLAB</a></li>#}
+{#                            <li><a href="https://github.com/yjxiong/anet2016-cuhk">Github</a></li>#}
+{#                        </ul>#}
+{#                    </nav>#}
+{#                </div>#}
+{#            </div>#}
 
-          <div class="inner cover">
-            <h1 class="cover-heading">Action Recognition from Videos</h1>
-              <br>
-            <p class="lead">
-                    <label>Choose local video file</label>
-                    <input id="video-input" name="video_file" type="file" class="file-loading" placeholder="Local video file">
+            <div class="inner cover">
+                <h1 class="cover-heading">Action Recognition from Videos</h1>
+                <br>
+                <div class="lead">
+                    <div class="form-group">
+                        <label>Local video file</label>
+                        <input id="video-input" name="video_file" type="file" class="file-loading"
+                               placeholder="Local video file">
+                    </div>
 
-                    <br>
-                    <div class="input-group" id="url_input_group">
-                        <input type="text" id="url_input" class="form-control" placeholder="or Youtube URL" aria-describedby="basic-addon1">
+                    <div class="form-group">
+                        <label>Online Video</label>
+                        <div class="input-group" id="url_input_group">
+                            <input type="text" id="url_input" class="form-control" placeholder="Youtube URL"
+                                   aria-describedby="basic-addon1">
                         <span class="input-group-btn">
-                            <button class="btn btn-primary" type="button">Analyze!</button>
+                            <button class="btn btn-primary" type="button" id="url_upload">Analyze!</button>
                         </span>
                         </div>
                     </div>
                     <div id="kv-error-1" style="margin-top:10px;display:none"></div>
-                    <div id="kv-success-1" class="alert alert-success fade in text-left" style="margin-top:10px;display:none">
+                    <div id="kv-success-1" class="alert alert-success fade in text-left"
+                         style="margin-top:10px;display:none;font-size:10pt">
                         <h2> Top-3 Predictions</h2>
                         <p>We are showing 3 most confident predictions for the whole video.</p>
                         <table class="table table-hover" id="result_table">
@@ -79,64 +86,118 @@
 
                             </tbody>
                         </table>
-                    </div>
-                    <div id="kv-upload-1" class="alert alert-info fade in" style="margin-top:10px;display:none">
-                        <img src="static/img/loading-sm.gif">Uploading file and analyzing the video
-                    </div>
-            </p>
-            <p class="lead">
-              <a href="#" class="btn btn-lg btn-default">Learn More on Github</a>
-            </p>
-          </div>
 
-          <div class="mastfoot">
-            <div class="inner">
-              <p>Cover template for <a href="http://getbootstrap.com">Bootstrap</a>, by <a href="https://twitter.com/mdo">@mdo</a>.</p>
+                        <h2>Runtime summary</h2>
+                        <div id="runtime_summary"></div>
+                    </div>
+                    <div id="kv-upload-1" class="alert alert-info fade in" style="margin-top:10px;display:none;font-size:10pt">
+                        <img src="static/img/loading.gif"> Uploading and analyzing the video
+                    </div>
+                </div>
+                <div class="lead">
+                    <h4 style="color:gray">Disclaimer</h4>
+                    <p style="color:gray;font-size:10pt">
+                        This website is solely for academic demo use.
+                        Video contents will not be stored on the demo server.
+                        All copyrights belong to their respective owners.
+                    </p>
+                </div>
+                <div class="lead">
+                    <a href="https://github.com/yjxiong/anet2016-cuhk" class="btn btn-lg btn-default">Learn More on
+                        Github</a>
+                </div>
             </div>
-          </div>
+
+{#            <div class="mastfoot">#}
+{#                <div class="inner">#}
+{#                    <p>Cover template for <a href="http://getbootstrap.com">Bootstrap</a>, by <a#}
+{#                            href="https://twitter.com/mdo">@mdo</a>.</p>#}
+{#                </div>#}
+{#            </div>#}
 
         </div>
 
-      </div>
-
     </div>
 
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script
-			  src="https://code.jquery.com/jquery-2.2.4.min.js"
-			  integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
-			  crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-    <script src="static/js/fileinput.min.js"></script>
-    <script>
-        $("#video-input").fileinput({
-            uploadUrl: "/upload_video",
-            showUpload: true,
-            showPreview: false,
-            uploadAsync: true,
-            allowedFileExtensions: ['avi', 'webm', 'mp4', 'mkv'],
-            multiple: false
-        }).on('fileuploaded', function(event, data, id, index) {
-            res = data.response;
+</div>
 
-            console.log(res.results)
-            for (var i = 0; i < 3; ++i) {
-                $('#result_table > tbody:last-child').append('<tr><td>'+res.results[i].name+'</td><td>'+res.results[i].score+'</td></tr>')
-            }
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script
+        src="https://code.jquery.com/jquery-2.2.4.min.js"
+        integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+        crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"
+        integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
+        crossorigin="anonymous"></script>
+<script src="static/js/fileinput.min.js"></script>
+<script>
+
+    var display_results = function (res) {
+        for (var i = 0; i < 3; ++i) {
+            $('#result_table > tbody:last-child').append('<tr><td>' + res.results[i].name + '</td><td>' + parseFloat(res.results[i].score).toFixed(6) + '</td></tr>')
+        }
+
+        $("#runtime_summary").html(
+                "Estimated video duration: " + (res.n_snippet / res.fps).toFixed(0) + " second(s). " +
+                "Total running time: " + parseFloat(res.total_time).toFixed(2) + " second(s)."
+        );
+    };
+
+    // file upload scripts
+    $("#video-input").fileinput({
+        uploadUrl: "/upload_video",
+        showUpload: true,
+        showPreview: false,
+        uploadAsync: true,
+        allowedFileExtensions: ['avi', 'webm', 'mp4', 'mkv'],
+        multiple: false
+    }).on('fileuploaded', function (event, data, id, index) {
+        res = data.response;
+
+        console.log(res.results)
+        display_results(res);
+        // visual changes
+        $('#kv-upload-1').hide();
+        $('#kv-success-1').fadeIn('slow');
+    }).on('filelock', function (event, filestack, extraData) {
+        $('#result_table > tbody > tr').remove();
+        $('#kv-success-1').fadeOut('slow');
+        $('#kv-upload-1').fadeIn('slow');
+    }).on('fileclear', function (event) {
+        $('#kv-success-1').hide();
+        $('#kv-upload-1').hide();
+    });
+
+    // URL analyzer scripts
+    $("#url_upload").click(function () {
+
+        $('#result_table > tbody > tr').remove();
+        $("#video-input").fileinput('disable');
+        $(this).prop("disabled", true);
+
+        video_url = $("#url_input").val();
+        $('#kv-success-1').fadeOut('slow');
+        $('#kv-upload-1').fadeIn('slow');
+
+        $.ajax({
+            method: "POST",
+            url: "/upload_url",
+            data: {video_url: video_url},
+        }).done(function (res) {
+            display_results(res);
 
             // visual changes
-            $('#kv-upload-1').hide();
             $('#kv-success-1').fadeIn('slow');
-        }).on('filelock', function(event, filestack, extraData) {
-            $('#result_table > tbody > tr').remove();
-            $('#kv-success-1').fadeOut('slow');
-            $('#kv-upload-1').fadeIn('slow');
-        }).on('fileclear', function(event) {
-            $('#kv-success-1').hide();
+        }).fail(function () {
+            alert("analysis failed!");
+        }).always(function () {
             $('#kv-upload-1').hide();
-        });
-    </script>
-  </body>
+            $("#video-input").fileinput('enable');
+            $("#url_upload").prop("disabled", false);
+        })
+    })
+</script>
+</body>
 </html>

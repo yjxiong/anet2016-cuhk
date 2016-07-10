@@ -25,7 +25,7 @@ class ActionClassifier(object):
     This class provides and end-to-end interface to classifying videos into activity classes
     """
 
-    def __init__(self, models=list(), total_norm_weights=None, score_name='fc-action'):
+    def __init__(self, models=list(), total_norm_weights=None, score_name='fc-action', dev_id=0):
         """
         Contruct an action classifier
         Args:
@@ -36,7 +36,7 @@ class ActionClassifier(object):
             total_norm_weights: sum of all model_fusion_weights when normalization is wanted, otherwise use None
         """
 
-        self.__net_vec = [CaffeNet(x[0], x[1], 0,
+        self.__net_vec = [CaffeNet(x[0], x[1], dev_id,
                                    input_size=(340, 256) if x[4] else None
                                    ) for x in models]
         self.__net_weights = [float(x[2]) for x in models]
@@ -64,7 +64,7 @@ class ActionClassifier(object):
         )
 
         if self.__need_flow:
-            self.__flow_extractor = FlowExtractor(0)
+            self.__flow_extractor = FlowExtractor(dev_id)
 
     def classify(self, video):
         """
@@ -73,7 +73,8 @@ class ActionClassifier(object):
             video:
 
         Returns:
-
+            scores:
+            frm_scores:
         """
         import urlparse
 
@@ -92,7 +93,7 @@ class ActionClassifier(object):
 
         Returns:
             cls: classification scores
-            frm_cls: frame-wise classification scores
+            frm_scores: frame-wise classification scores
         """
         vid_info = _dummy_vid_info()
         vid_info.path = filename
@@ -143,9 +144,10 @@ class ActionClassifier(object):
         final_scores = default_fusion_func(np.zeros_like(agg_scores[0]), agg_scores, self.__net_weights)
 
         all_end = time.clock()
-        print "total time: {} second".format(all_end-all_start)
+        total_time = all_end - all_start
+        print "total time: {} second".format(total_time)
 
-        return final_scores, all_scores
+        return final_scores, all_scores, total_time
 
     def _classify_from_url(self, url):
         """
@@ -153,13 +155,13 @@ class ActionClassifier(object):
         It will first use Youtube-dl to download the video. Then will do classification on the downloaded file
         Returns:
             cls: classification scores
-            frm_cls: frame-wise classification scores
+            frm_scores: frame-wise classification scores
         """
 
         file_info = self.__video_dl.extract_info(url) # it also downloads the video file
         filename = file_info['id']+'.'+file_info['ext']
 
-        scores, frm_scores = self._classify_from_file(filename)
+        scores, frm_scores, total_time = self._classify_from_file(filename)
         import os
         os.remove(filename)
-        return scores, frm_scores
+        return scores, frm_scores, total_time

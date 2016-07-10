@@ -68,6 +68,8 @@ python examples/classify_video.py https://www.youtube.com/watch?v=QkuC0lvMAX0
 The two-stream model here consists of one reset-200 model for RGB input and one BN-Inception model for optical flow input. 
 The model spec and parameter files can be found in `models/`.
 
+##Web Demo
+
 ##LICENSE
 Released under [BSD 2-Clause license][license].
 
