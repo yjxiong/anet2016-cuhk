@@ -1,18 +1,19 @@
-# CUHK & ETH & SIAT Solution to AcitivityNet Challenge 2016 
+# CUHK & ETH & SIAT Solution to ActivityNet Challenge 2016 
 
 This repository holds the materials necessary to reproduce the results for our solution to ActivityNet Challenge 2016. 
-We works on the untrimmed video classification task. 
+We won the 1st place in the untrimmed video classification task. 
+
 Although initially designed for the challenge, the repository also means to provide an accessible framework for general video classification tasks.
 
 *We are currently organizing the codebase. Please stay tuned.*
 
-* Jun 7 - Single video classification released
+* Jun 10 - Web demo code released
 
 ##Functionalities & Release Status
 
 - [x] Basic utilities
 - [x] Action recognition with single video
-    * [ ] Web demo for action recognition
+    * [x] Web demo for action recognition
 - [ ] ActivityNet validation set evaluation
 - [ ] Training action recognition system
 
@@ -60,7 +61,7 @@ python examples/classify_video.py --use_flow data/plastering.avi
 ```
 You can use your own video files by specifying the filename. 
 
-One can use also specify a youtube url here to do the classification, for example
+One can also specify a youtube url here to do the classification, for example
 ```
 python examples/classify_video.py https://www.youtube.com/watch?v=QkuC0lvMAX0
 ```
@@ -68,7 +69,23 @@ python examples/classify_video.py https://www.youtube.com/watch?v=QkuC0lvMAX0
 The two-stream model here consists of one reset-200 model for RGB input and one BN-Inception model for optical flow input. 
 The model spec and parameter files can be found in `models/`.
 
-##Web Demo
+###Web Demo
+
+We also provide a light-weighted demo server. The server uses [Flask][flask].
+
+```
+python demo_server.py
+```
+
+It will be run on `127.0.0.1:5000`. It supports uploading local files and directly analyzing Youtube-style video urls.
+
+For a quick start, we have set up a public demo server at
+
+[Action Recognition Web Demo][demo]
+
+The server runs on the Titan X GPU awarded for winning the challenge. Thanks to the organizers!
+
+
 
 ##LICENSE
 Released under [BSD 2-Clause license][license].
@@ -76,3 +93,5 @@ Released under [BSD 2-Clause license][license].
 
 [anaconda]:https://www.continuum.io/downloads
 [license]:https://github.com/yjxiong/anet2016-cuhk/blob/master/LICENSE
+[flask]:http://flask.pocoo.org/
+[demo]:#
