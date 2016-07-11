@@ -23,6 +23,10 @@ class VideoProc(object):
         self._frame_width = -1
         self._frame_height = -1
 
+        # length limit
+        from config import ANET_CFG
+        self._max_frames = 30 * ANET_CFG.MAX_DURATION
+
         if open_on_init:
             self.open_video()
 
@@ -49,6 +53,9 @@ class VideoProc(object):
             while True:
                 suc, frame = vcap.read()
                 cnt += 1
+
+                if cnt >= self._max_frames:
+                    break
 
                 if suc:
                     self._frames.append(frame)
