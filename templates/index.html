@@ -54,6 +54,10 @@
                 <h1 class="cover-heading">Action Recognition from Videos</h1>
                 <br>
                 <div class="lead">
+                    <div class="form-group" style="font-size:12pt;">
+                        <input type="checkbox" id="chk_rgb" checked> Analyze appearance (RGB) <br>
+                        <input type="checkbox" id="chk_flow" >   Analyze motion (optical flow)
+                    </div>
                     <div class="form-group">
                         <label>Local video file</label>
                         <input id="video-input" name="video_file" type="file" class="file-loading"
@@ -145,6 +149,16 @@
         );
     };
 
+    var check_models = function(){
+        var use_rgb = $("#chk_rgb").prop("checked");
+        var use_flow = $("#chk_flow").prop("checked");
+
+        return {
+            use_rgb:use_rgb,
+            use_flow:use_flow
+        }
+    };
+
     // file upload scripts
     $("#video-input").fileinput({
         uploadUrl: "/upload_video",
@@ -152,7 +166,8 @@
         showPreview: false,
         uploadAsync: true,
         allowedFileExtensions: ['avi', 'webm', 'mp4', 'mkv'],
-        multiple: false
+        multiple: false,
+        uploadExtraData: check_models
     }).on('fileuploaded', function (event, data, id, index) {
         res = data.response;
 
@@ -161,6 +176,7 @@
         // visual changes
         $('#kv-upload-1').hide();
         $('#kv-success-1').fadeIn('slow');
+
     }).on('filelock', function (event, filestack, extraData) {
         $('#result_table > tbody > tr').remove();
         $('#kv-success-1').fadeOut('slow');
@@ -184,7 +200,7 @@
         $.ajax({
             method: "POST",
             url: "/upload_url",
-            data: {video_url: video_url},
+            data: $.extend({}, {video_url: video_url}, check_models()),
         }).done(function (res) {
             display_results(res);
 

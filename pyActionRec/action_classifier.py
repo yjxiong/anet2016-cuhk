@@ -66,7 +66,7 @@ class ActionClassifier(object):
         if self.__need_flow:
             self.__flow_extractor = FlowExtractor(dev_id)
 
-    def classify(self, video):
+    def classify(self, video, model_mask=None):
         """
 
         Args:
@@ -79,13 +79,13 @@ class ActionClassifier(object):
         import urlparse
 
         if os.path.isfile(video):
-            return self._classify_from_file(video)
+            return self._classify_from_file(video, model_mask)
         elif urlparse.urlparse(video).scheme != "":
-            return self._classify_from_url(video)
+            return self._classify_from_url(video, model_mask)
 
         raise ValueError("Unknown input data type")
 
-    def _classify_from_file(self, filename):
+    def _classify_from_file(self, filename, model_mask):
         """
         Input a file on harddisk
         Args:
@@ -109,6 +109,16 @@ class ActionClassifier(object):
         all_start = time.clock()
 
         cnt = 0
+
+        # process model mask
+        mask = [True] * self.__num_net
+        n_model = self.__num_net
+        if model_mask is not None:
+            for i in xrange(len(model_mask)):
+                mask[i] = model_mask[i]
+                if not mask[i]:
+                    n_model -= 1
+
         for frm_stack in frm_it:
 
             start = time.clock()
@@ -116,7 +126,10 @@ class ActionClassifier(object):
             frm_scores = []
 
             flow_stack = None
-            for net, in_type, conv_support in zip(self.__net_vec, self.__input_type, self.__conv_support):
+            for net, run, in_type, conv_support in zip(self.__net_vec, mask, self.__input_type, self.__conv_support):
+                if not run:
+                    continue
+
                 if in_type == 0:
                     # RGB input
                     frm_scores.append(net.predict_single_frame(frm_stack[:1], self.__score_name,
@@ -137,11 +150,11 @@ class ActionClassifier(object):
 
         # aggregate frame-wise scores
         agg_scores = []
-        for i in xrange(self.__num_net):
+        for i in xrange(n_model):
             model_scores = sliding_window_aggregation_func(np.array([x[i] for x in all_scores]), norm=False)
             agg_scores.append(model_scores)
 
-        final_scores = default_fusion_func(np.zeros_like(agg_scores[0]), agg_scores, self.__net_weights)
+        final_scores = default_fusion_func(np.zeros_like(agg_scores[0]), agg_scores, [w for w, m in zip(self.__net_weights, mask) if m])
 
         all_end = time.clock()
         total_time = all_end - all_start
@@ -149,7 +162,7 @@ class ActionClassifier(object):
 
         return final_scores, all_scores, total_time
 
-    def _classify_from_url(self, url):
+    def _classify_from_url(self, url, model_mask):
         """
         This function classify an video based on input video url
         It will first use Youtube-dl to download the video. Then will do classification on the downloaded file
@@ -161,7 +174,7 @@ class ActionClassifier(object):
         file_info = self.__video_dl.extract_info(url) # it also downloads the video file
         filename = file_info['id']+'.'+file_info['ext']
 
-        scores, frm_scores, total_time = self._classify_from_file(filename)
+        scores, frm_scores, total_time = self._classify_from_file(filename, model_mask)
         import os
         os.remove(filename)
         return scores, frm_scores, total_time

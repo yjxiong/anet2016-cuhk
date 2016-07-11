@@ -59,10 +59,13 @@ def build_cls_ret(scores, k):
     return top_k_results
 
 
-def run_classification(filename):
+def run_classification(filename, use_rgb, use_flow):
     try:
-        scores, frm_scores, total_time = cls.classify(filename)
-    except:
+        scores, frm_scores, total_time = cls.classify(filename, [use_rgb=='true', use_flow=='true'])
+    except Exception as e:
+        import traceback
+        import sys
+        traceback.print_exception(*sys.exc_info())
         return jsonify(error='classification failed'), 200, {'ContentType': 'application/json'}
     finally:
         # clear the file
@@ -85,6 +88,9 @@ def upload_video():
     if upload_file.filename == '':
         return jsonify(error='the file has no name'), 200, {'ContentType': 'application/json'}
 
+    use_rgb = request.form['use_rgb']
+    use_flow = request.form['use_flow']
+
     if upload_file and allowed_file(upload_file.filename):
         filename = secure_filename(upload_file.filename)
 
@@ -93,7 +99,7 @@ def upload_video():
         upload_file.save(savename)
 
         # classify the video
-        return run_classification(savename)
+        return run_classification(savename, use_rgb, use_flow)
 
     else:
         return jsonify(error='empty or not allowed file'), 200, {'ContentType': 'application/json'}
@@ -104,6 +110,9 @@ def upload_url():
     data = request.form
     url = data['video_url']
 
+    use_rgb = data['use_rgb']
+    use_flow = data['use_flow']
+
     try:
         file_info = ydl.extract_info(unicode(url))
     except:
@@ -112,7 +121,7 @@ def upload_url():
     filename = os.path.join('tmp',file_info['id']+'.'+file_info['ext'])
 
     # classify the video
-    return run_classification(filename)
+    return run_classification(filename, use_rgb, use_flow)
 
 if __name__ == "__main__":
     # run the Flask app

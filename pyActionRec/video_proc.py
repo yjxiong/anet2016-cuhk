@@ -54,7 +54,7 @@ class VideoProc(object):
                 suc, frame = vcap.read()
                 cnt += 1
 
-                if cnt >= self._max_frames:
+                if 0 < self._max_frames <= cnt:
                     break
 
                 if suc:
