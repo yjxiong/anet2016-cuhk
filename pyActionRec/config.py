@@ -28,6 +28,8 @@ ANET_CFG.ACC_EXT = {'.mp4', '.webm', '.avi', '.mkv'}
 # File name pattern of the video files
 ANET_CFG.SRC_ID_LEN = 11 # length of youtube IDs
 
+# Max length of video, -1 for unlimited
+ANET_CFG.MAX_DURATION = -1
 
 # MISC
 ANET_CFG.CAFFE_ROOT='lib/caffe-action/'

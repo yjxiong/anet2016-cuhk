@@ -62,5 +62,11 @@ pip install -r py_requirements.txt
 
 # setup for web demo
 mkdir tmp
-mkdir static
 
+# copy website files to the folder
+wget -O 3rd-party/bootstrap-fileinput.zip https://github.com/kartik-v/bootstrap-fileinput/zipball/master
+cd 3rd-party
+unzip bootstrap-fileinput.zip
+mv kartik-v-bootstrap-* Bootstrap-fileinput
+cp -r Bootstrap-fileinput/js ../static/js
+cp Bootstrap-fileinput/css/* ../static/css/

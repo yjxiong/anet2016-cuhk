@@ -45,8 +45,11 @@ class VideoProc(object):
         else:
             cnt = 0
             self._frames = []
+            cnt = 0
             while True:
                 suc, frame = vcap.read()
+                cnt += 1
+
                 if suc:
                     self._frames.append(frame)
                 else:
