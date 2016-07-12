@@ -88,7 +88,7 @@ The server runs on the Titan X GPU awarded for winning the challenge. Thanks to 
 
 ##Related Projects
 * Our modified [Caffe][caffe] with fast parallel training and Video data IO
-* [Dense Flow][caffe] toolkit for optical flow extraction
+* [Dense Flow][df] toolkit for optical flow extraction
 * [Very deep two-stream convnets][deep_2stream]
 * [Trajectory-Pooled Deep-Convolutional Descriptors (TDD)][tdd]
 
