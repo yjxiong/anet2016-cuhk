@@ -35,7 +35,10 @@ class CaffeNet(object):
 
         self._sample_shape = self._net.blobs['data'].data.shape
 
-    def predict_single_frame(self, frame, score_name, over_sample=True, multiscale=None):
+    def predict_single_frame(self, frame, score_name, over_sample=True, multiscale=None, frame_size=None):
+
+        if frame_size is not None:
+            frame = [cv2.resize(x, frame_size) for x in frame]
 
         if over_sample:
             if multiscale is None:

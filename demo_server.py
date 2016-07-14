@@ -20,10 +20,10 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 # model specifications
 models = [('models/resnet200_anet_2016_deploy.prototxt',
            'models/resnet200_anet_2016.caffemodel',
-           1.0, 0, True),
+           1.0, 0, True, 224),
           ('models/bn_inception_anet_2016_temporal_deploy.prototxt',
-           'models/bn_inception_anet_2016_temporal.caffemodel',
-           0.2, 1, False)
+           'models/bn_inception_anet_2016_temporal.caffemodel.v5',
+           0.2, 1, False, 224)
           ]
 
 GPU = 0

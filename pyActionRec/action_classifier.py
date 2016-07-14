@@ -29,7 +29,8 @@ class ActionClassifier(object):
         """
         Contruct an action classifier
         Args:
-            models: list of tuples in the form of (model_proto, model_params, model_fusion_weight, input_type, conv_support).
+            models: list of tuples in the form of
+                    (model_proto, model_params, model_fusion_weight, input_type, conv_support, input_size).
                     input_type is: 0-RGB, 1-Optical flow.
                     conv_support indicates whether the network supports convolution testing, which is faster. If this is
                     not supported, we will use oversampling instead
@@ -49,6 +50,9 @@ class ActionClassifier(object):
         self.__conv_support = [x[4] for x in models]
 
         self.__num_net = len(models)
+
+        # the input size of the network
+        self.__input_size = [x[5] for x in models]
 
         # whether we should prepare flow stack
         self.__need_flow = max(self.__input_type) > 0
@@ -119,6 +123,7 @@ class ActionClassifier(object):
                 if not mask[i]:
                     n_model -= 1
 
+
         for frm_stack in frm_it:
 
             start = time.clock()
@@ -126,19 +131,25 @@ class ActionClassifier(object):
             frm_scores = []
 
             flow_stack = None
-            for net, run, in_type, conv_support in zip(self.__net_vec, mask, self.__input_type, self.__conv_support):
+            for net, run, in_type, conv_support, net_input_size in \
+                    zip(self.__net_vec, mask, self.__input_type, self.__conv_support, self.__input_size):
                 if not run:
                     continue
 
+                frame_size = (340 * net_input_size / 224, 256 * net_input_size / 224)
+
                 if in_type == 0:
                     # RGB input
+
                     frm_scores.append(net.predict_single_frame(frm_stack[:1], self.__score_name,
-                                                               over_sample=not conv_support))
+                                                               over_sample=not conv_support,
+                                                               frame_size=None if net_input_size == 224 else frame_size
+                                                               ))
                 elif in_type == 1:
                     # Flow input
                     if flow_stack is None:
                         # Extract flow if necessary
-                        flow_stack = self.__flow_extractor.extract_flow(frm_stack)
+                        flow_stack = self.__flow_extractor.extract_flow(frm_stack, frame_size)
 
                     frm_scores.append(net.predict_single_flow_stack(flow_stack, self.__score_name,
                                                                     over_sample=not conv_support))

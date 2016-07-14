@@ -31,14 +31,17 @@ VIDEO_NAME = args.video_name
 USE_FLOW = args.use_flow
 GPU=args.gpu
 
+models=[]
+
 models = [('models/resnet200_anet_2016_deploy.prototxt',
            'models/resnet200_anet_2016.caffemodel',
-           1.0, 0, True)]
+           1.0, 0, True, 224)]
+
 
 if USE_FLOW:
     models.append(('models/bn_inception_anet_2016_temporal_deploy.prototxt',
-                   'models/bn_inception_anet_2016_temporal.caffemodel',
-                   0.2, 1, False))
+                   'models/bn_inception_anet_2016_temporal.caffemodel.v5',
+                   0.2, 1, False, 224))
 
 cls = ActionClassifier(models, dev_id=GPU)
 rst = cls.classify(VIDEO_NAME)
@@ -53,7 +56,7 @@ lb_list = db.get_ordered_label_list()
 idx = np.argsort(scores)[::-1]
 
 print '----------------Classification Results----------------------'
-for i in xrange(3):
+for i in xrange(10):
     k = idx[i]
     print lb_list[k], scores[k]
 
