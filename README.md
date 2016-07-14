@@ -7,6 +7,7 @@ Although initially designed for the challenge, the repository also means to prov
 
 *We are currently organizing the codebase. Please stay tuned.*
 
+* Jun 11- [Demo website][demo] is now online!
 * Jun 10 - Web demo code released
 
 ##Functionalities & Release Status
@@ -87,7 +88,7 @@ The server runs on the Titan X GPU awarded for winning the challenge. Thanks to 
 
 ##Related Projects
 * Our modified [Caffe][caffe] with fast parallel training and Video data IO
-* [Dense Flow][caffe] toolkit for optical flow extraction
+* [Dense Flow][df] toolkit for optical flow extraction
 * [Very deep two-stream convnets][deep_2stream]
 * [Trajectory-Pooled Deep-Convolutional Descriptors (TDD)][tdd]
 
@@ -98,7 +99,7 @@ Released under [BSD 2-Clause license][license].
 [anaconda]:https://www.continuum.io/downloads
 [license]:https://github.com/yjxiong/anet2016-cuhk/blob/master/LICENSE
 [flask]:http://flask.pocoo.org/
-[demo]:#
+[demo]:http://137.189.97.26/
 [caffe]:https://github.com/yjxiong/caffe
 [df]:https://github.com/yjxiong/dense_flow
 [tdd]:https://github.com/wanglimin/TDD
