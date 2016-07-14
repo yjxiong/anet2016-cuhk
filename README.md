@@ -7,8 +7,9 @@ Although initially designed for the challenge, the repository also means to prov
 
 *We are currently organizing the codebase. Please stay tuned.*
 
-* Jun 11- [Demo website][demo] is now online!
-* Jun 10 - Web demo code released
+* Jul 14 - The correct reference flow model is available for download. See [here](https://github.com/yjxiong/anet2016-cuhk/blob/master/models/get_reference_models.sh).
+* Jul 11 - [Demo website][demo] is now online!
+* Jul 10 - Web demo code released
 
 ##Functionalities & Release Status
 
