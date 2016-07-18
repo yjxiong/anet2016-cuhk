@@ -100,7 +100,7 @@ Released under [BSD 2-Clause license][license].
 [anaconda]:https://www.continuum.io/downloads
 [license]:https://github.com/yjxiong/anet2016-cuhk/blob/master/LICENSE
 [flask]:http://flask.pocoo.org/
-[demo]:http://137.189.97.26/
+[demo]:http://action-demo.ie.cuhk.edu.hk/
 [caffe]:https://github.com/yjxiong/caffe
 [df]:https://github.com/yjxiong/dense_flow
 [tdd]:https://github.com/wanglimin/TDD
