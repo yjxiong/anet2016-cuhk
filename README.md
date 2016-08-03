@@ -7,8 +7,9 @@ Although initially designed for the challenge, the repository also means to prov
 
 *We are currently organizing the codebase. Please stay tuned.*
 
-* Jun 11- [Demo website][demo] is now online!
-* Jun 10 - Web demo code released
+* Jul 14 - The correct reference flow model is available for download. See [here](https://github.com/yjxiong/anet2016-cuhk/blob/master/models/get_reference_models.sh).
+* Jul 11 - [Demo website][demo] is now online!
+* Jul 10 - Web demo code released
 
 ##Functionalities & Release Status
 
@@ -99,7 +100,7 @@ Released under [BSD 2-Clause license][license].
 [anaconda]:https://www.continuum.io/downloads
 [license]:https://github.com/yjxiong/anet2016-cuhk/blob/master/LICENSE
 [flask]:http://flask.pocoo.org/
-[demo]:http://137.189.97.26/
+[demo]:http://action-demo.ie.cuhk.edu.hk/
 [caffe]:https://github.com/yjxiong/caffe
 [df]:https://github.com/yjxiong/dense_flow
 [tdd]:https://github.com/wanglimin/TDD
