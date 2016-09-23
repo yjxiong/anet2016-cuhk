@@ -106,3 +106,4 @@ Released under [BSD 2-Clause license][license].
 [df]:https://github.com/yjxiong/dense_flow
 [tdd]:https://github.com/wanglimin/TDD
 [deep_2stream]:http://personal.ie.cuhk.edu.hk/~xy012/others/action_recog/
+[tsn]:https://github.com/yjxiong/temporal-segment-networks
