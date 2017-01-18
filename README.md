@@ -17,7 +17,7 @@ Although initially designed for the challenge, the repository also means to prov
 - [x] Action recognition with single video
     * [x] Web demo for action recognition
 - [ ] ActivityNet validation set evaluation
-- [ ] Training action recognition system
+- [x] Training action recognition system - We use the [TSN][tsn] framework to train our models.
 
 ##Dependencies
 The codebase is written in Python. It is recommended to use [Anaconda][anaconda] distribution package with it.
@@ -107,3 +107,4 @@ Released under [BSD 2-Clause license][license].
 [tdd]:https://github.com/wanglimin/TDD
 [deep_2stream]:http://personal.ie.cuhk.edu.hk/~xy012/others/action_recog/
 [tsn]:https://github.com/yjxiong/temporal-segment-networks
+
