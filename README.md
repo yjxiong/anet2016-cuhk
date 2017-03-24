@@ -5,13 +5,13 @@ We won the 1st place in the untrimmed video classification task.
 
 Although initially designed for the challenge, the repository also means to provide an accessible framework for general video classification tasks.
 
-*We are currently organizing the codebase. Please stay tuned.*
+* We are currently organizing the codebase. Please stay tuned.*
 
 * Jul 14 - The correct reference flow model is available for download. See [here](https://github.com/yjxiong/anet2016-cuhk/blob/master/models/get_reference_models.sh).
 * Jul 11 - [Demo website][demo] is now online!
 * Jul 10 - Web demo code released
 
-##Functionalities & Release Status
+## Functionalities & Release Status
 
 - [x] Basic utilities
 - [x] Action recognition with single video
@@ -19,17 +19,17 @@ Although initially designed for the challenge, the repository also means to prov
 - [ ] ActivityNet validation set evaluation
 - [x] Training action recognition system - We use the [TSN][tsn] framework to train our models.
 
-##Dependencies
+## Dependencies
 The codebase is written in Python. It is recommended to use [Anaconda][anaconda] distribution package with it.
 
 Besides, we also use Caffe and OpenCV. 
 Particularly, the OpenCV should be compiled with VideoIO support. GPU support will be good if possible.
 If you use `build_all.sh`, it will locally install these dependencies for you.
 
-##Requirements
+## Requirements
 NVIDIA GPU with CUDA support. At least 4GB display memory is needed to run the reference models.
 
-##Get the code
+## Get the code
 Use Git
 ```
 git clone --recursive https://github.com/yjxiong/anet2016-cuhk
@@ -40,7 +40,7 @@ If you happen to forget adding `--recursive` to the command. You can still go to
 git submodule update --init
 ```
 
-##Single Video Classification
+## Single Video Classification
 - Build all modules
 In the root directory of the project, run the following command
 ```
@@ -71,7 +71,7 @@ python examples/classify_video.py https://www.youtube.com/watch?v=QkuC0lvMAX0
 The two-stream model here consists of one reset-200 model for RGB input and one BN-Inception model for optical flow input. 
 The model spec and parameter files can be found in `models/`.
 
-###Web Demo
+### Web Demo
 
 We also provide a light-weighted demo server. The server uses [Flask][flask].
 
@@ -87,14 +87,14 @@ For a quick start, we have set up a public demo server at
 
 The server runs on the Titan X GPU awarded for winning the challenge. Thanks to the organizers!
 
-##Related Projects
+## Related Projects
 * [Temporal Segment Networks (TSN)][tsn] models for the challenge are trained under the TSN framework.
 * Our modified [Caffe][caffe] with fast parallel training and Video data IO
 * [Dense Flow][df] toolkit for optical flow extraction
 * [Very deep two-stream convnets][deep_2stream]
 * [Trajectory-Pooled Deep-Convolutional Descriptors (TDD)][tdd]
 
-##LICENSE
+## LICENSE
 Released under [BSD 2-Clause license][license].
 
 
