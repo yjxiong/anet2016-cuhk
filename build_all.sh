@@ -14,7 +14,7 @@ sudo apt-get -qq install libzip-dev
 
 # install common dependencies: OpenCV
 # adpated from OpenCV.sh
-version="2.4.12"
+version="2.4.13"
 
 echo "Building OpenCV" $version
 mkdir 3rd-party/
@@ -43,7 +43,7 @@ echo "Building Dense Flow"
 cd lib/dense_flow
 mkdir build 
 cd build
-OpenCV_DIR=../../../3rd-party/opencv-$version/build/ cmake ..
+OpenCV_DIR=../../../3rd-party/opencv-$version/build/ cmake .. -DCUDA_USE_STATIC_CUDA_RUNTIME=OFF
 make -j
 echo "Dense Flow built"
 
@@ -52,7 +52,7 @@ echo "Building Caffe"
 cd ../../caffe-action
 mkdir build 
 cd build
-OpenCV_DIR=../../../3rd-party/opencv-$version/build/ cmake ..
+OpenCV_DIR=../../../3rd-party/opencv-$version/build/ cmake .. -DCUDA_USE_STATIC_CUDA_RUNTIME=OFF
 make -j32
 echo "Caffe Built"
 cd ../../../
