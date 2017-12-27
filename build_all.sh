@@ -4,14 +4,6 @@
 # update the submodules: Caffe and Dense Flow
 git submodule update --remote
 
-# install Caffe dependencies
-sudo apt-get -qq install libprotobuf-dev libleveldb-dev libsnappy-dev libhdf5-serial-dev protobuf-compiler libatlas-base-dev
-sudo apt-get -qq install --no-install-recommends libboost1.55-all-dev
-sudo apt-get -qq install libgflags-dev libgoogle-glog-dev liblmdb-dev
-
-# install Dense_Flow dependencies
-sudo apt-get -qq install libzip-dev
-
 # install common dependencies: OpenCV
 # adpated from OpenCV.sh
 version="2.4.13"
@@ -19,9 +11,6 @@ version="2.4.13"
 echo "Building OpenCV" $version
 mkdir 3rd-party/
 cd 3rd-party/
-
-echo "Installing Dependenices"
-sudo apt-get -qq install libopencv-dev build-essential checkinstall cmake pkg-config yasm libjpeg-dev libjasper-dev libavcodec-dev libavformat-dev libswscale-dev libdc1394-22-dev libxine-dev libgstreamer0.10-dev libgstreamer-plugins-base0.10-dev libv4l-dev python-dev python-numpy libtbb-dev libqt4-dev libgtk2.0-dev libfaac-dev libmp3lame-dev libopencore-amrnb-dev libopencore-amrwb-dev libtheora-dev libvorbis-dev libxvidcore-dev x264 v4l-utils
 
 echo "Downloading OpenCV" $version
 wget -O OpenCV-$version.zip https://github.com/Itseez/opencv/archive/$version.zip
