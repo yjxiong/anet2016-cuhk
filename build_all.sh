@@ -6,17 +6,18 @@ git submodule update --remote
 
 # install common dependencies: OpenCV
 # adpated from OpenCV.sh
-version="2.4.13"
+version="2.4"
 
 echo "Building OpenCV" $version
 mkdir 3rd-party/
 cd 3rd-party/
 
 echo "Downloading OpenCV" $version
-wget -O OpenCV-$version.zip https://github.com/Itseez/opencv/archive/$version.zip
+#wget -O OpenCV-$version.zip https://github.com/Itseez/opencv/archive/$version.zip
+git clone --recursive -b 2.4 https://github.com/opencv/opencv opencv-$version
 
-echo "Installing OpenCV" $version
-unzip OpenCV-$version.zip
+#echo "Installing OpenCV" $version
+#unzip OpenCV-$version.zip
 cd opencv-$version
 mkdir build
 cd build
