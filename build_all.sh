@@ -21,6 +21,7 @@ git clone --recursive -b 2.4 https://github.com/opencv/opencv opencv-$version
 cd opencv-$version
 mkdir build
 cd build
+git apply ../../opencv_cuda9.patch
 cmake -D CMAKE_BUILD_TYPE=RELEASE -D WITH_TBB=ON  -D WITH_V4L=ON ..
 make -j32
 cp lib/cv2.so ../../../
